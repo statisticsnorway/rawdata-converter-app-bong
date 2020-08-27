@@ -1,0 +1,1 @@
+[![Build Status](https://dev.azure.com/statisticsnorway/Dapla/_apis/build/status/statisticsnorway.rawdata-converter-app-altinn3?branchName=master)](https://dev.azure.com/statisticsnorway/Dapla/_build/latest?definitionId=46&branchName=master)
