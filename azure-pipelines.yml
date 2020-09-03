@@ -118,6 +118,6 @@ jobs:
           echo "Tagging image eu.gcr.io/prod-bip/ssb/dapla/rawdata-converter-app-bong:$CURRENT_TAG with $RELEASE_TAG"
           cat $(gcrJsonKey.secureFilePath) | docker login -u _json_key --password-stdin https://eu.gcr.io
           docker pull eu.gcr.io/prod-bip/ssb/dapla/rawdata-converter-app-bong:$CURRENT_TAG
-          docker tag eu.gcr.io/prod-bip/ssb/dapla/rawdata-converter-app-bong:$CURRENT_TAG eu.gcr.io/prod-bip/ssb/dapla/rawdata-converter-app-bong:$TAG
+          docker tag eu.gcr.io/prod-bip/ssb/dapla/rawdata-converter-app-bong:$CURRENT_TAG eu.gcr.io/prod-bip/ssb/dapla/rawdata-converter-app-bong:$RELEASE_TAG
           docker push eu.gcr.io/prod-bip/ssb/dapla/rawdata-converter-app-bong:$RELEASE_TAG
         displayName: 'Tag production image'
