@@ -4,8 +4,8 @@ import lombok.extern.slf4j.Slf4j;
 import no.ssb.avro.convert.csv.CsvToRecords;
 import no.ssb.rawdata.api.RawdataMessage;
 import no.ssb.rawdata.converter.core.AbstractRawdataConverter;
-import no.ssb.rawdata.converter.core.schema.AggregateSchemaBuilder;
 import no.ssb.rawdata.converter.core.ConversionResult;
+import no.ssb.rawdata.converter.core.schema.AggregateSchemaBuilder;
 import org.apache.avro.Schema;
 import org.apache.avro.generic.GenericRecord;
 import org.apache.avro.generic.GenericRecordBuilder;
@@ -32,7 +32,6 @@ public class BongRawdataConverter extends AbstractRawdataConverter {
         this.metadataSchema = readAvroSchema("schema/message-metadata.avsc");
         this.bongSchema = readAvroSchema(converterConfig.getSchemaFileBong());
         this.bongItemSchema = bongSchema.getField(FIELDNAME_BONG_ITEMS).schema().getElementType();
-        System.out.println("###################" + bongItemSchema);
         aggregateSchema = new AggregateSchemaBuilder("no.ssb.dapla.kilde.bong.rawdata")
           .schema(FIELDNAME_METADATA, metadataSchema)
           .schema(FIELDNAME_BONG, bongSchema)

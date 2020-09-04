@@ -10,10 +10,10 @@ import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import no.ssb.rawdata.api.RawdataConsumer;
-import no.ssb.rawdata.converter.core.job.ConverterJobScheduler;
 import no.ssb.rawdata.converter.core.RawdataConsumerFactory;
 import no.ssb.rawdata.converter.core.RawdataConverter;
 import no.ssb.rawdata.converter.core.RawdataConverterConfig;
+import no.ssb.rawdata.converter.core.job.ConverterJobScheduler;
 
 import javax.ws.rs.core.MediaType;
 
