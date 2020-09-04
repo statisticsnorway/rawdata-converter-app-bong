@@ -1,0 +1,86 @@
+{
+  "type": "record",
+  "name": "root",
+  "fields": [
+    {
+      "name": "BONG_ITEMS",
+      "type": {
+        "type": "array",
+        "items": {
+          "type": "record",
+          "name": "BONG_ITEM",
+          "fields": [
+            {
+              "name": "AVSBUTIKKEANLOK_NR",
+              "type": "string"
+            },
+            {
+              "name" : "KJOPS_DT_TD",
+              "type" : [ "null", "string" ]
+            },
+            {
+              "name": "BONGNUMMER",
+              "type": "int"
+            },
+            {
+              "name": "KASSEPOS_NR",
+              "type": "int"
+            },
+            {
+              "name": "KASSETYPE",
+              "type": "string"
+            },
+            {
+              "name": "MOMS_BEL",
+              "type": "double"
+            },
+            {
+              "name": "TOTALRABATT_BEL",
+              "type": "double"
+            },
+            {
+              "name": "VAREKJOP_UTEN_PANT_BEL",
+              "type": "double"
+            },
+            {
+              "name": "VAREKJOP_MED_PANT_BEL",
+              "type": "double"
+            },
+            {
+              "name": "VARELINJER_ANT",
+              "type": "int"
+            },
+            {
+              "name": "BRUTTOVARELINJE_BEL",
+              "type": "double"
+            },
+            {
+              "name": "VARERABATT_BEL",
+              "type": "double"
+            },
+            {
+              "name": "VAREANTVEKT",
+              "type": "double"
+            },
+            {
+              "name": "VAREEAN_NR",
+              "type": "string"
+            },
+            {
+              "name": "VAREENHETKODE_NR",
+              "type": "int"
+            },
+            {
+              "name": "VARENAVN",
+              "type": "string"
+            },
+            {
+              "name": "MVASATS",
+              "type": "int"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

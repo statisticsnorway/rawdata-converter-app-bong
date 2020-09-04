@@ -18,7 +18,7 @@ build-docker: ## Build the docker image
 
 .PHONY: run-local
 run-local: ## Run the app locally (without docker)
-	java -Dcom.sun.management.jmxremote ${JAVA_OPTS} --enable-preview -Dmicronaut.environments=local -jar target/rawdata-converter-app-*.jar
+	java -Dcom.sun.management.jmxremote ${JAVA_OPTS} --enable-preview -Dmicronaut.environments=local-gcs -jar target/rawdata-converter-app-*.jar
 
 .PHONY: release-dryrun
 release-dryrun: ## Simulate a release in order to detect any issues

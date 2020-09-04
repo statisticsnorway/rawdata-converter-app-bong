@@ -10,37 +10,35 @@ oauth:
   server-url: https://keycloak.staging-bip-app.ssb.no/auth/realms/ssb/protocol/openid-connect
 
 rawdata.client:
-  provider: gcs
+  provider: filesystem
   local-temp-folder: temp
   avro-file:
     max.seconds: 3600
     max.bytes: 10485760
     sync.interval: 500000
-  gcs:
-    bucket-name: ssb-rawdata-dev
-    listing.min-interval-seconds: 15
-    credential-provider: service-account
-    service-account.key-file: ../localenv/auth/gcs/dev-sirius/gcs_credentials.json
-
-rawdata.encryption:
-    key: SECURE_KMS_TOKEN
-    salt: SALT
+  filesystem:
+    storage-folder: ./rawdata-store
+  listing:
+    min-interval-seconds: 0
 
 rawdata.converter:
   active-by-default: true
-  dryrun: true
-  storage-type: gcs
-  storage-root: gs://ssb-rawdata-dev/datastore
-  storage-path: /kilde/ng/bong/rådata/v1
+  dryrun: false
+  storage-type: local
+  storage-root: file://../localenv/datastore
+  storage-path: /kilde/ng/bong/raadata/v1
   storage-version: 1598553650000
   service-account-key-file: ../localenv/auth/gcs/dev-sirius/gcs_credentials.json
   topic: bong-ng-test
   window-max-records: 1000
   window-max-time-in-seconds: 60
-  initial-position: FIRST
+  initial-position: LAST
+  schema-metrics-enabled: true
+  dataset-type: BOUNDED
+
   dataset-meta:
     valuation: INTERNAL
-    type: UNBOUNDED
+    type: BOUNDED
     should-publish-meta: false
     data-access-service:
       host: localhost
@@ -50,19 +48,11 @@ rawdata.converter:
       port: 2424
       project-id: local
       topic: metadata-distributor-dataset-updates #FIXME
-  pseudo: # TODO: Remove
-    secrets:
-      repo:
-        secret1:
-          content: C5sn7B4YtwcilAwuVx6NuAsMWLusOSA/ldia40ZugDI=
-          type: AES256
-    config:
-      debug: true
-      rules:
-        hendelse:
-          pattern: '**/hendelse/identifikator'
-          func: fpe-fnr(secret1)
 
-rawdata.converter.app.altinn3:
-  schema-file-hendelse: schema/RA-0678_v1.2_20150506.avsc
-  gjelder-periode: 2019
+logger:
+  levels:
+    no.ssb.rawdata.converter.core: INFO
+
+rawdata.converter.app.bong:
+  schema-file-bong: schema/bong-ng.avsc
+
