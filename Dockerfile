@@ -1,4 +1,4 @@
-FROM openjdk:14-alpine
+FROM adoptopenjdk/openjdk14-openj9:alpine-slim
 RUN apk --no-cache add curl
 COPY target/rawdata-converter-app-bong-*.jar rawdata-converter-app-bong.jar
 COPY target/classes/logback*.xml /conf/
