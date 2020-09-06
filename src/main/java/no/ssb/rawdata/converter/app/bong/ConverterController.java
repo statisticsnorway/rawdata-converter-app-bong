@@ -29,7 +29,6 @@ public class ConverterController {
     @ExecuteOn(TaskExecutors.IO)
     @Post(consumes = MediaType.APPLICATION_JSON)
     public void startConverter(ConverterJob job) {
-        log.info("Starting converter...\n{}", job);
         RawdataConverter rawdataConverter = newConverter(job.bongRawdataConverterConfig);
         RawdataConsumer rawdataConsumer = rawdataConsumerFactory.rawdataConsumer(job.rawdataConverterConfig);
         jobScheduler.start(job.rawdataConverterConfig, rawdataConverter, rawdataConsumer);
