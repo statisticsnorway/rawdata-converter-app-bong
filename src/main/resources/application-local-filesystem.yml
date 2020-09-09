@@ -18,6 +18,7 @@ rawdata.client:
     sync.interval: 500000
   filesystem:
     storage-folder: ./rawdata-store
+    #storage-folder: ../localenv/rawdatastore
   listing:
     min-interval-seconds: 0
 
@@ -53,6 +54,6 @@ logger:
   levels:
     no.ssb.rawdata.converter.core: INFO
 
-rawdata.converter.app.bong:
-  schema-file-bong: schema/bong-ng.avsc
+#rawdata.converter.app.bong:
+#  schema-file-bong: schema/ng-bong.avsc
 

@@ -1,0 +1,62 @@
+{
+  "type": "record",
+  "name": "root",
+  "fields": [
+    {
+      "name": "BONG_ITEMS",
+      "type": {
+        "type": "array",
+        "items": {
+          "type": "record",
+          "name": "BONG_ITEM",
+          "fields": [
+            {
+              "name": "Dato",
+              "type": "string"
+            },
+            {
+              "name" : "Butikk_nr",
+              "type" : "string"
+            },
+            {
+              "name": "Bongnr",
+              "type": "string"
+            },
+            {
+              "name": "GTIN",
+              "type": "string"
+            },
+            {
+              "name": "Coop_varnenr",
+              "type": "string"
+            },
+            {
+              "name": "Vare",
+              "type": "string"
+            },
+            {
+              "name": "Dato_tid",
+              "type": "string"
+            },
+            {
+              "name": "Mengde",
+              "type": "string"
+            },
+            {
+              "name": "Enhet",
+              "type": "string"
+            },
+            {
+              "name": "Pris",
+              "type": "string"
+            },
+            {
+              "name": "Valuta",
+              "type": "string"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

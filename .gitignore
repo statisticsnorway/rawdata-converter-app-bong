@@ -4,6 +4,10 @@ Thumbs.db
 build/
 target/
 out/
+rawdata-store/
+failed-messages/
+temp/
+datasets/
 .idea
 *.iml
 *.ipr
@@ -11,6 +15,4 @@ out/
 .project
 .settings
 .classpath
-datasets/
 dependency-reduced-pom.xml
-rawdata-store

@@ -13,6 +13,8 @@ import org.apache.avro.generic.GenericRecordBuilder;
 import java.util.ArrayList;
 import java.util.List;
 
+import static no.ssb.rawdata.converter.core.util.RawdataMessageUtil.posAndIdOf;
+
 @Slf4j
 public class BongRawdataConverter extends AbstractRawdataConverter {
 
@@ -44,7 +46,7 @@ public class BongRawdataConverter extends AbstractRawdataConverter {
     }
 
     @Override
-    public boolean isConvertible(RawdataMessage msg) {
+    public boolean isConvertible(RawdataMessage rawdataMessage) {
         return true;
     }
 
@@ -57,7 +59,7 @@ public class BongRawdataConverter extends AbstractRawdataConverter {
 
         // Convert bong data
         if (rawdataMessage.keys().contains(RAWDATA_ITEM_NAME_BONG)) {
-            convertBongData(rawdataMessage.get(RAWDATA_ITEM_NAME_BONG), resultBuilder);
+            convertBongData(rawdataMessage, resultBuilder);
         }
 
         return resultBuilder.build();
@@ -71,7 +73,8 @@ public class BongRawdataConverter extends AbstractRawdataConverter {
         resultBuilder.withRecord(FIELDNAME_METADATA, builder.build());
     }
 
-    void convertBongData(byte[] data, ConversionResult.ConversionResultBuilder resultBuilder) {
+    void convertBongData(RawdataMessage rawdataMessage, ConversionResult.ConversionResultBuilder resultBuilder) {
+        byte[] data = rawdataMessage.get(RAWDATA_ITEM_NAME_BONG);
         try (CsvToRecords csvToRecords = new CsvToRecords(data, bongItemSchema)) {
             List<GenericRecord> bongItems = new ArrayList<>();
             csvToRecords.forEach(bongItems::add);
@@ -79,7 +82,7 @@ public class BongRawdataConverter extends AbstractRawdataConverter {
             GenericRecord bongRecord = new GenericRecordBuilder(bongSchema).set(FIELDNAME_BONG_ITEMS, bongItems).build();
             resultBuilder.withRecord(FIELDNAME_BONG, bongRecord);
         } catch (Exception e) {
-            throw new BongRawdataConverterException("Error converting bong data", e);
+            throw new BongRawdataConverterException("Error converting bong data at " + posAndIdOf(rawdataMessage), e);
         }
     }
 
