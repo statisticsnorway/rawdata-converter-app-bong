@@ -12,47 +12,47 @@
           "fields": [
             {
               "name": "Dato",
-              "type": "string"
+              "type": [ "null", "string" ]
             },
             {
               "name" : "Butikk_nr",
-              "type" : "string"
+              "type" : [ "null", "string" ]
             },
             {
               "name": "Bongnr",
-              "type": "string"
+              "type": [ "null", "string" ]
             },
             {
               "name": "GTIN",
-              "type": "string"
+              "type": [ "null", "string" ]
             },
             {
               "name": "Coop_varnenr",
-              "type": "string"
+              "type": [ "null", "string" ]
             },
             {
               "name": "Vare",
-              "type": "string"
+              "type": [ "null", "string" ]
             },
             {
               "name": "Dato_tid",
-              "type": "string"
+              "type": [ "null", "string" ]
             },
             {
               "name": "Mengde",
-              "type": "string"
+              "type": [ "null", "string" ]
             },
             {
               "name": "Enhet",
-              "type": "string"
+              "type": [ "null", "string" ]
             },
             {
               "name": "Pris",
-              "type": "string"
+              "type": [ "null", "string" ]
             },
             {
               "name": "Valuta",
-              "type": "string"
+              "type": [ "null", "string" ]
             }
           ]
         }

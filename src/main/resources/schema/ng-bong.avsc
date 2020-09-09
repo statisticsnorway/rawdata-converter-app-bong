@@ -12,7 +12,7 @@
           "fields": [
             {
               "name": "AVSBUTIKKEANLOK_NR",
-              "type": "string"
+              "type": [ "null", "string" ]
             },
             {
               "name" : "KJOPS_DT_TD",
@@ -20,63 +20,63 @@
             },
             {
               "name": "BONGNUMMER",
-              "type": "int"
+              "type": [ "null", "int" ]
             },
             {
               "name": "KASSEPOS_NR",
-              "type": "int"
+              "type": [ "null", "int" ]
             },
             {
               "name": "KASSETYPE",
-              "type": "string"
+              "type": [ "null", "string" ]
             },
             {
               "name": "MOMS_BEL",
-              "type": "double"
+              "type": [ "null", "double" ]
             },
             {
               "name": "TOTALRABATT_BEL",
-              "type": "double"
+              "type": [ "null", "double" ]
             },
             {
               "name": "VAREKJOP_UTEN_PANT_BEL",
-              "type": "double"
+              "type": [ "null", "double" ]
             },
             {
               "name": "VAREKJOP_MED_PANT_BEL",
-              "type": "double"
+              "type": [ "null", "double" ]
             },
             {
               "name": "VARELINJER_ANT",
-              "type": "int"
+              "type": [ "null", "int" ]
             },
             {
               "name": "BRUTTOVARELINJE_BEL",
-              "type": "double"
+              "type": [ "null", "double" ]
             },
             {
               "name": "VARERABATT_BEL",
-              "type": "double"
+              "type": [ "null", "double" ]
             },
             {
               "name": "VAREANTVEKT",
-              "type": "double"
+              "type": [ "null", "double" ]
             },
             {
               "name": "VAREEAN_NR",
-              "type": "string"
+              "type": [ "null", "string" ]
             },
             {
               "name": "VAREENHETKODE_NR",
-              "type": "int"
+              "type": [ "null", "int" ]
             },
             {
               "name": "VARENAVN",
-              "type": "string"
+              "type": [ "null", "string" ]
             },
             {
               "name": "MVASATS",
-              "type": "int"
+              "type": [ "null", "int" ]
             }
           ]
         }
