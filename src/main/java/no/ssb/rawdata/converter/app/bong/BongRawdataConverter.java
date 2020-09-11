@@ -13,6 +13,7 @@ import org.apache.avro.generic.GenericRecordBuilder;
 import java.util.ArrayList;
 import java.util.List;
 
+import static no.ssb.rawdata.converter.app.bong.CounterKeys.TOTAL_BONG_LINE_COUNT;
 import static no.ssb.rawdata.converter.core.util.RawdataMessageUtil.posAndIdOf;
 
 @Slf4j
@@ -52,7 +53,7 @@ public class BongRawdataConverter extends AbstractRawdataConverter {
 
     @Override
     public ConversionResult convert(RawdataMessage rawdataMessage) {
-        ConversionResult.ConversionResultBuilder resultBuilder = new ConversionResult.ConversionResultBuilder(new GenericRecordBuilder(aggregateSchema));
+        ConversionResult.ConversionResultBuilder resultBuilder = ConversionResult.builder(new GenericRecordBuilder(aggregateSchema));
 
         // Add metadata about the message
         addMetadata(rawdataMessage, resultBuilder);

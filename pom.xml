@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>no.ssb.rawdata.converter</groupId>
   <artifactId>rawdata-converter-app-bong</artifactId>
-  <version>0.0.11-SNAPSHOT</version>
+  <version>0.0.12-SNAPSHOT</version>
   <properties>
     <micronaut.version>2.0.1</micronaut.version>
     <jdk.version>14</jdk.version>
@@ -14,7 +14,7 @@
     <exec.mainClass>no.ssb.rawdata.converter.app.bong.Application</exec.mainClass>
     <maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
     <maven-failsafe-plugin.version>2.22.2</maven-failsafe-plugin.version>
-    <rawdata-converter-core.version>0.3.8</rawdata-converter-core.version>
+    <rawdata-converter-core.version>0.3.10</rawdata-converter-core.version>
     <rawdata-converter-testutils.version>0.1.5</rawdata-converter-testutils.version>
     <lombok.version>1.18.12</lombok.version>
   </properties>
@@ -77,7 +77,7 @@
     <dependency>
       <groupId>no.ssb.avro.convert.csv</groupId>
       <artifactId>avro-buddy-csv</artifactId>
-      <version>0.0.1</version>
+      <version>0.0.2</version>
     </dependency>
     <dependency>
       <groupId>com.univocity</groupId>
