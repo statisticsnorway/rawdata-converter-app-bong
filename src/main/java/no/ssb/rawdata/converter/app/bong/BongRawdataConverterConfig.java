@@ -1,24 +1,28 @@
 package no.ssb.rawdata.converter.app.bong;
 
-import com.google.common.base.Strings;
 import io.micronaut.context.annotation.ConfigurationProperties;
+import io.micronaut.core.convert.format.MapFormat;
 import lombok.Data;
 
 import javax.validation.constraints.NotEmpty;
+import java.util.HashMap;
+import java.util.Map;
 
 @ConfigurationProperties("rawdata.converter.app.bong")
 @Data
 public class BongRawdataConverterConfig {
 
+    /**
+     * The name of the bong avro schema to use
+     */
     @NotEmpty
     private String schemaFileBong;
 
-    public String toDebugString() {
-        return debugItem("schema bong", schemaFileBong);
-    }
-
-    private String debugItem(String label, Object value) {
-        return Strings.padEnd(label, 24, '.') + " " + value + "\n";
-    }
+    /**
+     * Optional csv parser settings overrides.
+     * E.g. allowing to explicitly specify the delimiter character
+     */
+    @MapFormat(transformation = MapFormat.MapTransformation.FLAT)
+    private Map<String, Object> csvSettings = new HashMap<>();
 
 }

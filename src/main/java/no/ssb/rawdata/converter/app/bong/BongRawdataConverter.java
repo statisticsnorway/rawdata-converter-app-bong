@@ -2,6 +2,7 @@ package no.ssb.rawdata.converter.app.bong;
 
 import lombok.extern.slf4j.Slf4j;
 import no.ssb.avro.convert.csv.CsvToRecords;
+import no.ssb.avro.convert.json.Json;
 import no.ssb.rawdata.api.RawdataMessage;
 import no.ssb.rawdata.converter.core.AbstractRawdataConverter;
 import no.ssb.rawdata.converter.core.ConversionResult;
@@ -10,6 +11,7 @@ import org.apache.avro.Schema;
 import org.apache.avro.generic.GenericRecord;
 import org.apache.avro.generic.GenericRecordBuilder;
 
+import java.io.ByteArrayInputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,6 +41,10 @@ public class BongRawdataConverter extends AbstractRawdataConverter {
           .schema(FIELDNAME_METADATA, metadataSchema)
           .schema(FIELDNAME_BONG, bongSchema)
           .build();
+
+        if (! converterConfig.getCsvSettings().isEmpty()) {
+            log.info("Overridden CSV parser settings:\n{}", Json.prettyFrom(converterConfig.getCsvSettings()));
+        }
     }
 
     @Override
@@ -76,13 +82,14 @@ public class BongRawdataConverter extends AbstractRawdataConverter {
 
     void convertBongData(RawdataMessage rawdataMessage, ConversionResult.ConversionResultBuilder resultBuilder) {
         byte[] data = rawdataMessage.get(RAWDATA_ITEM_NAME_BONG);
-        try (CsvToRecords csvToRecords = new CsvToRecords(data, bongItemSchema)) {
+        try (CsvToRecords csvToRecords = new CsvToRecords(new ByteArrayInputStream(data), bongItemSchema, converterConfig.getCsvSettings())) {
             List<GenericRecord> bongItems = new ArrayList<>();
             csvToRecords.forEach(bongItems::add);
-
+            resultBuilder.appendCounter(TOTAL_BONG_LINE_COUNT, bongItems.size());
             GenericRecord bongRecord = new GenericRecordBuilder(bongSchema).set(FIELDNAME_BONG_ITEMS, bongItems).build();
             resultBuilder.withRecord(FIELDNAME_BONG, bongRecord);
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             throw new BongRawdataConverterException("Error converting bong data at " + posAndIdOf(rawdataMessage), e);
         }
     }

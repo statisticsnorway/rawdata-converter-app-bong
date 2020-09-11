@@ -40,7 +40,8 @@ public class BongConverterJobExecutorTest {
         rawdataConverterConfig.setDatasetType(Type.BOUNDED);
 
         BongRawdataConverterConfig bongRawdataConverterConfig = new BongRawdataConverterConfig();
-        bongRawdataConverterConfig.setSchemaFileBong("schema/bong-ng.avsc");
+        bongRawdataConverterConfig.setSchemaFileBong("schema/ng-bong.avsc");
+        bongRawdataConverterConfig.getCsvSettings().put("delimiters", "|");
         RawdataConverter converter = new BongRawdataConverter(bongRawdataConverterConfig);
 
         RawdataConsumer rawdataConsumer = rawdataConsumerFactory.rawdataConsumer(rawdataConverterConfig);
