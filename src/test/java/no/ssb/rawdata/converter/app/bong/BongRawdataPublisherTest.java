@@ -32,7 +32,7 @@ public class BongRawdataPublisherTest {
     void publishRawdataMessagesToLocalAvroFile() {
         String topic = "some-shop";
         RawdataMessages messages = fixtures.rawdataMessages(topic);
-        publishRawdataMessages(messages, filesystemConfig(topic, "../localenv/rawdatastore")
+        publishRawdataMessages(messages, filesystemConfig(topic, "./rawdata-store")
           .cleanupBefore(true)
           .cleanupAfter(true)
         );
