@@ -2,7 +2,9 @@ package no.ssb.rawdata.converter.app.bong;
 
 import lombok.extern.slf4j.Slf4j;
 import no.ssb.avro.convert.csv.CsvToRecords;
+import no.ssb.avro.convert.csv.InconsistentCsvDataException;
 import no.ssb.avro.convert.json.Json;
+import no.ssb.avro.convert.xml.XmlToRecords;
 import no.ssb.rawdata.api.RawdataMessage;
 import no.ssb.rawdata.converter.core.AbstractRawdataConverter;
 import no.ssb.rawdata.converter.core.ConversionResult;
@@ -21,6 +23,10 @@ import static no.ssb.rawdata.converter.core.util.RawdataMessageUtil.posAndIdOf;
 @Slf4j
 public class BongRawdataConverter extends AbstractRawdataConverter {
 
+    enum BongFileFormat {
+        CSV, XML;
+    }
+
     private final Schema aggregateSchema;
     private final Schema metadataSchema;
     private final Schema bongSchema;
@@ -31,6 +37,8 @@ public class BongRawdataConverter extends AbstractRawdataConverter {
     private static final String FIELDNAME_BONG = "bong";
     private static final String FIELDNAME_BONG_ITEMS = "BONG_ITEMS";
     private final BongRawdataConverterConfig converterConfig;
+
+    private static final String XML_ELEMENT_NAME_REMA_BONG = "something";
 
     public BongRawdataConverter(BongRawdataConverterConfig converterConfig) {
         this.converterConfig = converterConfig;
@@ -45,6 +53,12 @@ public class BongRawdataConverter extends AbstractRawdataConverter {
         if (! converterConfig.getCsvSettings().isEmpty()) {
             log.info("Overridden CSV parser settings:\n{}", Json.prettyFrom(converterConfig.getCsvSettings()));
         }
+    }
+
+    private BongFileFormat bongFileFormat() {
+        return "rema".equalsIgnoreCase(converterConfig.getBongSource())
+          ? BongFileFormat.XML
+          : BongFileFormat.CSV;
     }
 
     @Override
@@ -66,7 +80,12 @@ public class BongRawdataConverter extends AbstractRawdataConverter {
 
         // Convert bong data
         if (rawdataMessage.keys().contains(RAWDATA_ITEM_NAME_BONG)) {
-            convertBongData(rawdataMessage, resultBuilder);
+            if (bongFileFormat() == BongFileFormat.CSV) {
+                convertCsvBongData(rawdataMessage, resultBuilder);
+            }
+            else {
+                convertXmlBongData(rawdataMessage, XML_ELEMENT_NAME_REMA_BONG, resultBuilder);
+            }
         }
 
         return resultBuilder.build();
@@ -80,11 +99,11 @@ public class BongRawdataConverter extends AbstractRawdataConverter {
         resultBuilder.withRecord(FIELDNAME_METADATA, builder.build());
     }
 
-    void convertBongData(RawdataMessage rawdataMessage, ConversionResult.ConversionResultBuilder resultBuilder) {
+    void convertCsvBongData(RawdataMessage rawdataMessage, ConversionResult.ConversionResultBuilder resultBuilder) {
         byte[] data = rawdataMessage.get(RAWDATA_ITEM_NAME_BONG);
-        try (CsvToRecords csvToRecords = new CsvToRecords(new ByteArrayInputStream(data), bongItemSchema, converterConfig.getCsvSettings())) {
+        try (CsvToRecords records = new CsvToRecords(new ByteArrayInputStream(data), bongItemSchema, converterConfig.getCsvSettings())) {
             List<GenericRecord> bongItems = new ArrayList<>();
-            csvToRecords.forEach(bongItems::add);
+            records.forEach(bongItems::add);
             resultBuilder.appendCounter(TOTAL_BONG_LINE_COUNT, bongItems.size());
             GenericRecord bongRecord = new GenericRecordBuilder(bongSchema).set(FIELDNAME_BONG_ITEMS, bongItems).build();
             resultBuilder.withRecord(FIELDNAME_BONG, bongRecord);
@@ -97,6 +116,14 @@ public class BongRawdataConverter extends AbstractRawdataConverter {
             throw new BongRawdataConverterException("Error converting bong data at " + posAndIdOf(rawdataMessage), e);
         }
     }
+
+    void convertXmlBongData(RawdataMessage rawdataMessage, String rootXmlElementName, ConversionResult.ConversionResultBuilder resultBuilder) {
+        byte[] data = rawdataMessage.get(RAWDATA_ITEM_NAME_BONG);
+        try (XmlToRecords records = new XmlToRecords(new ByteArrayInputStream(data), "", bongItemSchema)) {
+            records.forEach(record ->
+              resultBuilder.withRecord(rootXmlElementName, record)
+            );
+        }
         catch (Exception e) {
             throw new BongRawdataConverterException("Error converting bong data at " + posAndIdOf(rawdataMessage), e);
         }

@@ -1,10 +1,11 @@
 package no.ssb.rawdata.converter.app.bong;
 
 import io.micronaut.context.annotation.ConfigurationProperties;
+import io.micronaut.context.annotation.Context;
 import io.micronaut.core.convert.format.MapFormat;
 import lombok.Data;
 
-import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotBlank;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -15,8 +16,11 @@ public class BongRawdataConverterConfig {
     /**
      * The name of the bong avro schema to use
      */
-    @NotEmpty
+    @NotBlank
     private String schemaFileBong;
+
+    @NotBlank
+    private String bongSource;
 
     /**
      * Optional csv parser settings overrides.
