@@ -89,6 +89,14 @@ public class BongRawdataConverter extends AbstractRawdataConverter {
             GenericRecord bongRecord = new GenericRecordBuilder(bongSchema).set(FIELDNAME_BONG_ITEMS, bongItems).build();
             resultBuilder.withRecord(FIELDNAME_BONG, bongRecord);
         }
+        catch (InconsistentCsvDataException e) {
+            log.warn("Encountered inconsistent csv data at " + posAndIdOf(rawdataMessage) + ". The bong data could not be converted.", e);
+            resultBuilder.addFailure(e);
+        }
+        catch (Exception e) {
+            throw new BongRawdataConverterException("Error converting bong data at " + posAndIdOf(rawdataMessage), e);
+        }
+    }
         catch (Exception e) {
             throw new BongRawdataConverterException("Error converting bong data at " + posAndIdOf(rawdataMessage), e);
         }
