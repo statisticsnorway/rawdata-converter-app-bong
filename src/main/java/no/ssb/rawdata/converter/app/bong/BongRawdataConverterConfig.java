@@ -1,7 +1,6 @@
 package no.ssb.rawdata.converter.app.bong;
 
 import io.micronaut.context.annotation.ConfigurationProperties;
-import io.micronaut.context.annotation.Context;
 import io.micronaut.core.convert.format.MapFormat;
 import lombok.Data;
 
@@ -19,8 +18,11 @@ public class BongRawdataConverterConfig {
     @NotBlank
     private String schemaFileBong;
 
+    /**
+     * Name of the bong source. E.g. 'ng', 'coop' or 'rema'
+     */
     @NotBlank
-    private String bongSource;
+    private String source;
 
     /**
      * Optional csv parser settings overrides.

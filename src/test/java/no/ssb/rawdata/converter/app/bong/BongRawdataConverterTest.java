@@ -1,6 +1,7 @@
 package no.ssb.rawdata.converter.app.bong;
 
 import no.ssb.rawdata.converter.core.ConversionResult;
+import no.ssb.rawdata.converter.core.ValueInterceptorChain;
 import no.ssb.rawdata.converter.core.util.RawdataMessageFacade;
 import no.ssb.rawdata.converter.test.message.RawdataMessageFixtures;
 import no.ssb.rawdata.converter.test.message.RawdataMessages;

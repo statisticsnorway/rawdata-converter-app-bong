@@ -13,7 +13,9 @@ import no.ssb.rawdata.api.RawdataConsumer;
 import no.ssb.rawdata.converter.core.RawdataConsumerFactory;
 import no.ssb.rawdata.converter.core.RawdataConverter;
 import no.ssb.rawdata.converter.core.RawdataConverterConfig;
+import no.ssb.rawdata.converter.core.ValueInterceptorChain;
 import no.ssb.rawdata.converter.core.job.ConverterJobScheduler;
+import no.ssb.rawdata.converter.core.metrics.SchemaMetricsPublisher;
 
 import javax.ws.rs.core.MediaType;
 
@@ -24,23 +26,29 @@ public class ConverterController {
 
     private final RawdataConsumerFactory rawdataConsumerFactory;
     private final ConverterJobScheduler jobScheduler;
+    private final SchemaMetricsPublisher schemaMetricsPublisher;
 
     @Async
     @ExecuteOn(TaskExecutors.IO)
     @Post(consumes = MediaType.APPLICATION_JSON)
-    public void startConverter(ConverterJob job) {
-        RawdataConverter rawdataConverter = newConverter(job.bongRawdataConverterConfig);
+    public void startConverter(ConverterJobSpecification job) {
+        RawdataConverter rawdataConverter = newConverter(job);
         RawdataConsumer rawdataConsumer = rawdataConsumerFactory.rawdataConsumer(job.rawdataConverterConfig);
         jobScheduler.start(job.rawdataConverterConfig, rawdataConverter, rawdataConsumer);
     }
 
-    private RawdataConverter newConverter(BongRawdataConverterConfig bongRawdataConverterConfig) {
-        RawdataConverter converter = new BongRawdataConverter(bongRawdataConverterConfig);
+    private RawdataConverter newConverter(ConverterJobSpecification job) {
+        ValueInterceptorChain valueInterceptorChain = new ValueInterceptorChain();
+        if (job.getRawdataConverterConfig().isSchemaMetricsEnabled()) {
+            valueInterceptorChain.register(schemaMetricsPublisher::notifyFieldConverted);
+        }
+
+        RawdataConverter converter = new BongRawdataConverter(job.getBongRawdataConverterConfig(), valueInterceptorChain);
         return converter;
     }
 
     @Data
-    public static class ConverterJob {
+    public static class ConverterJobSpecification {
         private RawdataConverterConfig rawdataConverterConfig;
         private BongRawdataConverterConfig bongRawdataConverterConfig;
     }
