@@ -343,9 +343,9 @@
                                 },
                                 {
                                   "name": "POSIdentity",
-                                  "type": {
-                                    "type": "array",
-                                    "items": {
+                                  "type": [
+                                    "null",
+                                    {
                                       "type": "record",
                                       "name": "POSIdentitySchema",
                                       "fields": [
@@ -366,14 +366,19 @@
                                           "default": null
                                         }
                                       ]
+                                    },
+                                    {
+                                      "type": "array",
+                                      "items": "POSIdentitySchema"
                                     }
-                                  }
+                                  ]
                                 },
                                 {
                                   "name": "MerchandiseHierarchy",
-                                  "type": {
-                                    "type": "array",
-                                    "items": {
+                                  "default": null,
+                                  "type": [
+                                    "null",
+                                    {
                                       "type": "record",
                                       "name": "MerchandiseHierarchySchema",
                                       "fields": [
@@ -394,13 +399,19 @@
                                           "default": null
                                         }
                                       ]
+                                    },
+                                    {
+                                      "type": "array",
+                                      "items": "MerchandiseHierarchySchema"
                                     }
-                                  }
+                                  ]
                                 },
                                 {
                                   "name": "Description",
+                                  "default": null,
                                   "type": [
-                                    "null", {
+                                    "null",
+                                    {
                                       "type": "record",
                                       "name": "DescriptionSchema",
                                       "fields": [
@@ -421,7 +432,8 @@
                                           "default": null
                                         }
                                       ]
-                                    }, {
+                                    },
+                                    {
                                       "type": "array",
                                       "items": "DescriptionSchema"
                                     }
@@ -580,9 +592,10 @@
                 },
                 {
                   "name": "Total",
-                  "type": {
-                    "type": "array",
-                    "items": {
+                  "default": null,
+                  "type": [
+                    "null",
+                    {
                       "type": "record",
                       "name": "TotalSchema",
                       "fields": [
@@ -611,8 +624,12 @@
                           "default": null
                         }
                       ]
+                    },
+                    {
+                      "type": "array",
+                      "items": "TotalSchema"
                     }
-                  }
+                  ]
                 }
               ]
             }

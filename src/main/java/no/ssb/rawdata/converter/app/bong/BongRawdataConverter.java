@@ -43,7 +43,6 @@ public class BongRawdataConverter extends AbstractRawdataConverter {
     private static final String FIELDNAME_METADATA = "metadata";
     private static final String FIELDNAME_BONG = "bong";
     private static final String FIELDNAME_BONG_ITEMS = "BONG_ITEMS";
-    private static final String XML_ELEMENTNAME_REMA_BONG = "POSLog";
 
     public BongRawdataConverter(BongRawdataConverterConfig converterConfig) {
         this(converterConfig, new ValueInterceptorChain());
@@ -114,7 +113,7 @@ public class BongRawdataConverter extends AbstractRawdataConverter {
             convertCsvBongData(rawdataMessage, resultBuilder);
         }
         else {
-            convertXmlBongData(rawdataMessage, XML_ELEMENTNAME_REMA_BONG, resultBuilder);
+            convertXmlBongData(rawdataMessage, resultBuilder);
         }
 
         return resultBuilder.build();
@@ -148,7 +147,7 @@ public class BongRawdataConverter extends AbstractRawdataConverter {
         }
     }
 
-    void convertXmlBongData(RawdataMessage rawdataMessage, String rootXmlElementName, ConversionResult.ConversionResultBuilder resultBuilder) {
+    void convertXmlBongData(RawdataMessage rawdataMessage, ConversionResult.ConversionResultBuilder resultBuilder) {
         byte[] data = rawdataMessage.get(RAWDATA_ITEMNAME_BONG);
         try {
             String json = xmlToJson(data);
@@ -157,7 +156,6 @@ public class BongRawdataConverter extends AbstractRawdataConverter {
             resultBuilder.withRecord(FIELDNAME_BONG, genericRecord);
         }
         catch (Exception e) {
-            System.out.println(xmlToJson(data));
             RawdataMessageFacade.print(rawdataMessage);
             throw new BongRawdataConverterException("Error converting bong data at " + posAndIdOf(rawdataMessage), e);
         }
