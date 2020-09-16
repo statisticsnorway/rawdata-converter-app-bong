@@ -498,69 +498,75 @@
                                 },
                                 {
                                   "name": "Tax",
-                                  "type": {
-                                    "type": "record",
-                                    "name": "TaxSchema",
-                                    "fields": [
-                                      {
-                                        "name": "TaxSubType",
-                                        "type": [
-                                          "null",
-                                          "string"
-                                        ],
-                                        "default": null
-                                      },
-                                      {
-                                        "name": "Amount",
-                                        "type": [
-                                          "null",
-                                          "string"
-                                        ],
-                                        "default": null
-                                      },
-                                      {
-                                        "name": "Percent",
-                                        "type": [
-                                          "null",
-                                          "string"
-                                        ],
-                                        "default": null
-                                      },
-                                      {
-                                        "name": "TaxGroupID",
-                                        "type": {
-                                          "type": "record",
-                                          "name": "TaxGroupIDSchema",
-                                          "fields": [
-                                            {
-                                              "name": "ArticleGroupCode",
-                                              "type": [
-                                                "null",
-                                                "string"
-                                              ],
-                                              "default": null
-                                            },
-                                            {
-                                              "name": "value",
-                                              "type": [
-                                                "null",
-                                                "string"
-                                              ],
-                                              "default": null
-                                            }
-                                          ]
+                                  "default": null,
+                                  "type": [
+                                    "null",
+                                    {
+                                      "type": "record",
+                                      "name": "TaxSchema",
+                                      "fields": [
+                                        {
+                                          "name": "TaxSubType",
+                                          "type": [
+                                            "null",
+                                            "string"
+                                          ],
+                                          "default": null
+                                        },
+                                        {
+                                          "name": "Amount",
+                                          "type": [
+                                            "null",
+                                            "string"
+                                          ],
+                                          "default": null
+                                        },
+                                        {
+                                          "name": "Percent",
+                                          "type": [
+                                            "null",
+                                            "string"
+                                          ],
+                                          "default": null
+                                        },
+                                        {
+                                          "name": "TaxGroupID",
+                                          "default": null,
+                                          "type": {
+                                            "type": "record",
+                                            "name": "TaxGroupIDSchema",
+                                            "fields": [
+                                              {
+                                                "name": "ArticleGroupCode",
+                                                "type": [
+                                                  "null",
+                                                  "string"
+                                                ],
+                                                "default": null
+                                              },
+                                              {
+                                                "name": "value",
+                                                "type": [
+                                                  "null",
+                                                  "string"
+                                                ],
+                                                "default": null
+                                              }
+                                            ]
+                                          }
+                                        },
+                                        {
+                                          "name": "RecyclingAmount",
+                                          "default": null,
+                                          "type": [
+                                            "null",
+                                            "string"
+                                          ],
+                                          "default": null
                                         }
-                                      },
-                                      {
-                                        "name": "RecyclingAmount",
-                                        "type": [
-                                          "null",
-                                          "string"
-                                        ],
-                                        "default": null
-                                      }
-                                    ]
-                                  }
+                                      ]
+                                    }
+                                  ]
                                 }
                               ]
                             }
