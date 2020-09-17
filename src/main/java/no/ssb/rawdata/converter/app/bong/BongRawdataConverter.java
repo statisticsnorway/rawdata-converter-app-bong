@@ -89,7 +89,7 @@ public class BongRawdataConverter extends AbstractRawdataConverter {
         if (isSource(SOURCE_REMA)) {
             String xml = new String(rawdataMessage.get(RAWDATA_ITEMNAME_BONG));
 
-            if (xml.contains("ReceiptNumber")) {
+            if (xml.contains("ReceiptNumber") && xml.contains("RetailTransaction")) {
                 return true;
             }
             else {
