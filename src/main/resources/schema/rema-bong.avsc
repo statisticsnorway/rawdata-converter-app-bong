@@ -311,6 +311,7 @@
                                 },
                                 {
                                   "name": "ItemSubType",
+                                  "default": null,
                                   "type": [
                                     "null",
                                     "string"
@@ -327,6 +328,7 @@
                                 },
                                 {
                                   "name": "ItemProperty",
+                                  "default": null,
                                   "type": [
                                     "null",
                                     "string"
@@ -343,6 +345,7 @@
                                 },
                                 {
                                   "name": "POSIdentity",
+                                  "default": null,
                                   "type": [
                                     "null",
                                     {
@@ -441,6 +444,7 @@
                                 },
                                 {
                                   "name": "UnitCostPrice",
+                                  "default": null,
                                   "type": [
                                     "null",
                                     "string"
@@ -449,6 +453,7 @@
                                 },
                                 {
                                   "name": "SuggestedPrice",
+                                  "default": null,
                                   "type": [
                                     "null",
                                     "string"
@@ -457,6 +462,7 @@
                                 },
                                 {
                                   "name": "ExtendedAmount",
+                                  "default": null,
                                   "type": [
                                     "null",
                                     "string"
@@ -465,6 +471,7 @@
                                 },
                                 {
                                   "name": "Quantity",
+                                  "default": null,
                                   "type": {
                                     "type": "record",
                                     "name": "QuantitySchema",
